@@ -10,7 +10,7 @@ const Login = () => {
     const [password,setPassword]=useState("")
     const dispatch=useDispatch();
     const navigate=useNavigate()
-    const [error,setError]=useState(null)
+    const [error,setError]=useState()
     const handleLogin=async()=>{
       
         try{
@@ -23,13 +23,13 @@ const Login = () => {
           )
           
          dispatch(addUser(res.data));
-         return navigate("/feed")
-            setError(null)
+         return navigate("/")
+           
            
         }catch(err){
-            const msg = err?.response?.data || err?.message
-            console.error(msg)
-            setError(msg)
+            
+        setError(err?.response?.data || "Some Thing Went Wrong")
+         
         }
 
     }
@@ -38,7 +38,7 @@ const Login = () => {
         <div className="card bg-base-300 w-96 shadow-sm">
   <div className="card-body">
     <h2 className="card-title justify-center">Login</h2>
-    {error && <p className="text-sm text-red-600 text-center">{error}</p>}
+    {/* {error && <p className="text-sm text-red-600 text-center">{error}</p>} */}
    <div>
 <label className="form-control w-full max-w-xs my-2">
   <div className="label">
@@ -57,6 +57,7 @@ const Login = () => {
   
 </label>
    </div>
+   <p className='text-red-500'>{error}</p>
     <div className="card-actions justify-center m-2">
       <button className="btn btn-primary" onClick={handleLogin}>Login</button>
     </div>
