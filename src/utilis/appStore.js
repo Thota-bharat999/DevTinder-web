@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import useReducer  from "./userSlice";
 import feedReducer from "./feedSlice"
 import connectionReducer from './connectionSlice'
+import requestsReducer from './requestSlice'
 
 const appStroe=configureStore({
 reducer:{
     user:useReducer,
     feed:feedReducer,
-    connections:connectionReducer
+    connections:connectionReducer,
+    requests:requestsReducer,
 }
 })
 export default appStroe
