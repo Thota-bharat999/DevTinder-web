@@ -10,11 +10,14 @@ const Preuimum = () => {
 
 
   const verifyPremiumUser=async()=>{
-    const res=await axios.get(BASE_URL+"/payment/verify",{withCredentials:true})
-    if(res.data.isPremium){
-      setIsUserPremium(true)
+    try{
+      const res=await axios.get(BASE_URL+"/payment/verify",{withCredentials:true})
+      if(res.data && res.data.isPremium){
+        setIsUserPremium(true)
+      }
+    }catch(err){
+      console.error("Error verifying premium status:", err)
     }
-
   }
 
   const handleBuyClick = async (type) => {
