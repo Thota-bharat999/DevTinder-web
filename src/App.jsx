@@ -8,6 +8,7 @@ import appStroe from "./utilis/appStore"
 import Feed from "./components/Feed"
 import Connection from "./components/Connection"
 import Request  from "./components/Request"
+import Preuimum  from "./components/Preuimum"
 
 function App() {
  
@@ -22,6 +23,7 @@ function App() {
       <Route path="/profile" element={<Profile/>}/>
        <Route path="/connections" element={<Connection/>}/>
         <Route path="/requests" element={<Request/>}/>
+         <Route path="/premium" element={<Preuimum/>}/>
 
 
       </Route>
