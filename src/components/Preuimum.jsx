@@ -1,8 +1,21 @@
 import axios from "axios";
 import { BASE_URL } from "../utilis/constants";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Preuimum = () => {
+  const [isUserPremium,setIsUserPremium]=useState(false)
+  useEffect(()=>{
+    verifyPremiumUser()
+  },[])
+
+
+  const verifyPremiumUser=async()=>{
+    const res=await axios.get(BASE_URL+"/payment/verify",{withCredentials:true})
+    if(res.data.isPremium){
+      setIsUserPremium(true)
+    }
+
+  }
 
   const handleBuyClick = async (type) => {
   try {
@@ -24,9 +37,6 @@ const Preuimum = () => {
   description: "Premium Membership",
   order_id: orderId,
 
-  handler: function (response) {
-    console.log("Payment Success:", response);
-  },
 
   prefill: {
     name: `${notes.firstName} ${notes.lastName}`,
@@ -35,7 +45,9 @@ const Preuimum = () => {
   },
 
   theme: { color: "#F37254" },
+  handler:verifyPremiumUser,
 };
+
 
     const rzp = new window.Razorpay(options);
     rzp.open();
@@ -46,7 +58,10 @@ const Preuimum = () => {
 };
 
 
-  return (
+  return isUserPremium ? (
+"You're already a Premium user"
+  ):(
+
     <div className="m-10">
       <div className="flex w-full">
 
@@ -87,6 +102,6 @@ const Preuimum = () => {
       </div>
     </div>
   );
-};
 
+}
 export default Preuimum;
