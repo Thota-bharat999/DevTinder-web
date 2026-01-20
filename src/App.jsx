@@ -9,6 +9,7 @@ import Feed from "./components/Feed"
 import Connection from "./components/Connection"
 import Request  from "./components/Request"
 import Preuimum  from "./components/Preuimum"
+import Chat from "./components/Chat"
 
 function App() {
  
@@ -24,6 +25,7 @@ function App() {
        <Route path="/connections" element={<Connection/>}/>
         <Route path="/requests" element={<Request/>}/>
          <Route path="/premium" element={<Preuimum/>}/>
+         <Route path="/chat/:targetUserId" element={<Chat/>}/>
 
 
       </Route>

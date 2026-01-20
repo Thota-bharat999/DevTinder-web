@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { BASE_URL } from '../utilis/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addConnections } from '../utilis/connectionSlice'
+import { Link } from 'react-router-dom'
 
 
 const Connection = () => {
@@ -41,8 +42,9 @@ if(connections.length===0) return <h1>No Connections Found</h1>
        {age && gender&& <p>{age +", "+gender}</p>}
        <p>{about} </p>  
       </div>
-       
-      
+      <Link to={"/chat/" + _id}>
+      <button className='btn btn-primary'>Chat</button>
+      </Link>
     </div>
     )})}
     </div>
