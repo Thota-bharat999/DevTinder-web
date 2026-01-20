@@ -15,6 +15,7 @@ const Chat = () => {
   const user = useSelector((store) => store.user);
   const userId = user?._id;
 
+  // Fetch previous messages
   const fecthChatMessage = async () => {
     const chat = await axios.get(`${BASE_URL}/chat/${targetUserId}`, {
       withCredentials: true,
@@ -37,6 +38,7 @@ const Chat = () => {
     fecthChatMessage();
   }, []);
 
+  // Socket setup
   useEffect(() => {
     if (!userId) return;
 
@@ -51,8 +53,8 @@ const Chat = () => {
     });
 
     socket.on("messageRecived", ({ senderId, firstName, lastName, text }) => {
-      setMessages((messages) => [
-        ...messages,
+      setMessages((prev) => [
+        ...prev,
         { senderId, firstName, lastName, text },
       ]);
     });
@@ -62,6 +64,7 @@ const Chat = () => {
     };
   }, [userId, targetUserId]);
 
+  // Send message
   const sendMessage = () => {
     if (!socketRef.current || !newMessage.trim()) return;
 
@@ -89,7 +92,7 @@ const Chat = () => {
             }
           >
             <div className="chat-header">
-              {`${msg.firstName} ${msg.lastName}`}
+              {msg.firstName} {msg.lastName}
             </div>
             <div className="chat-bubble">{msg.text}</div>
           </div>
