@@ -54,6 +54,7 @@ fecthChatMessage()
         if(!socketRef.current) return
         socketRef.current.emit("sendMessage",{
             firstName:user.firstName,
+            lastName:user.lastName,
             userId,
             targetUserId,
             text:newMessage,
